@@ -154,7 +154,7 @@
 									"referenceName": "ds_sa_delimetedFile",
 									"type": "DatasetReference"
 								},
-								"enableLogging": true,
+								"enableLogging": false,
 								"storeSettings": {
 									"type": "AzureBlobStorageReadSettings",
 									"recursive": true,

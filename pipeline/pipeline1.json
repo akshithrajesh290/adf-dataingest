@@ -29,7 +29,8 @@
 					"dataset": {
 						"referenceName": "ds_mapping",
 						"type": "DatasetReference"
-					}
+					},
+					"firstRowOnly": false
 				}
 			},
 			{
@@ -58,12 +59,21 @@
 								"secureOutput": false,
 								"secureInput": false
 							},
-							"userProperties": []
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "fileName",
+								"value": "1"
+							}
 						}
 					]
 				}
 			}
 		],
+		"variables": {
+			"fileName": {
+				"type": "String"
+			}
+		},
 		"folder": {
 			"name": "Copy Data HTTP"
 		},

@@ -49,17 +49,37 @@
 				"inputs": [
 					{
 						"referenceName": "ds_http_delimeted",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"relativePath": {
+								"value": "@pipeline().parameters.relativePath",
+								"type": "Expression"
+							}
+						}
 					}
 				],
 				"outputs": [
 					{
 						"referenceName": "ds_http_delimter_gen2",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"fileName": {
+								"value": "@pipeline().parameters.fileName",
+								"type": "Expression"
+							}
+						}
 					}
 				]
 			}
 		],
+		"parameters": {
+			"relativePath": {
+				"type": "string"
+			},
+			"fileName": {
+				"type": "string"
+			}
+		},
 		"folder": {
 			"name": "Copy Data HTTP"
 		},

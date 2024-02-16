@@ -114,7 +114,7 @@
 									"type": "DatasetReference",
 									"parameters": {
 										"fileName": {
-											"value": "@item().sinkFileName",
+											"value": "@item().fileName",
 											"type": "Expression"
 										}
 									}
@@ -125,16 +125,6 @@
 				}
 			}
 		],
-		"parameters": {
-			"relativeurl": {
-				"type": "string",
-				"defaultValue": "akshithrajesh290/files/dev/hospital_admissions.csv"
-			},
-			"fileName": {
-				"type": "string",
-				"defaultValue": "hospital_admissions.csv"
-			}
-		},
 		"folder": {
 			"name": "CopyFromhttp"
 		},

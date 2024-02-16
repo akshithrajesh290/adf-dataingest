@@ -5,12 +5,20 @@
 			"referenceName": "ls_http_git",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"relativeurl": {
+				"type": "string"
+			}
+		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {
 				"type": "HttpServerLocation",
-				"relativeUrl": "akshithrajesh290/files/dev/coviddeaths.csv"
+				"relativeUrl": {
+					"value": "@dataset().relativeurl",
+					"type": "Expression"
+				}
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",

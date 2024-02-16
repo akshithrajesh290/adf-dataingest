@@ -49,17 +49,39 @@
 				"inputs": [
 					{
 						"referenceName": "DelimitedText1",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"relativeurl": {
+								"value": "@pipeline().parameters.relativeurl",
+								"type": "Expression"
+							}
+						}
 					}
 				],
 				"outputs": [
 					{
 						"referenceName": "ds_http_csv_gen2",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"fileName": {
+								"value": "@pipeline().parameters.fileName",
+								"type": "Expression"
+							}
+						}
 					}
 				]
 			}
 		],
+		"parameters": {
+			"relativeurl": {
+				"type": "string",
+				"defaultValue": "akshithrajesh290/files/dev/hospital_admissions.csv"
+			},
+			"fileName": {
+				"type": "string",
+				"defaultValue": "hospital_admissions.csv"
+			}
+		},
 		"folder": {
 			"name": "CopyFromhttp"
 		},

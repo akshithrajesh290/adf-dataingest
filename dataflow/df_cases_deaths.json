@@ -59,7 +59,6 @@
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     limit: 100,",
 				"     ignoreNoFilesFound: false) ~> sourcecasesdeaths",
 				"source(output(",
 				"          country as string,",

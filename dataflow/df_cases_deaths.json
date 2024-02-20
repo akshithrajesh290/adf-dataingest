@@ -69,7 +69,6 @@
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     limit: 100,",
 				"     ignoreNoFilesFound: false) ~> source1",
 				"sourcecasesdeaths filter(continent =='Europe' && not(isNull(country_code))) ~> filtereurpeonly",
 				"filtereurpeonly select(mapColumn(",

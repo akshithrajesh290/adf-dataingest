@@ -1,5 +1,5 @@
 {
-	"name": "ds_raw",
+	"name": "ds_cases_death",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "ls_adlsgen2",

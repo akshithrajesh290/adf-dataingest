@@ -17,6 +17,9 @@
 		"ls_http_git_properties_typeProperties_url": {
 			"value": "https://raw.githubusercontent.com/"
 		},
+		"ls_kv_properties_typeProperties_baseUrl": {
+			"value": "https://kv-lnd-devv.vault.azure.net/"
+		},
 		"containerUri": {
 			"value": ""
 		},

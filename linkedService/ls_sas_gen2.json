@@ -1,0 +1,19 @@
+{
+	"name": "ls_sas_gen2",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureBlobFS",
+		"typeProperties": {
+			"sasUri": "https://saaslnddevuksadlsv201.dfs.core.windows.net",
+			"sasToken": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "ls_kv",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "SAS-Token-saaslnddevuksadlsv201"
+			}
+		}
+	}
+}

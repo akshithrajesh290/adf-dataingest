@@ -76,7 +76,14 @@
 						{
 							"name": "Copy data1",
 							"type": "Copy",
-							"dependsOn": [],
+							"dependsOn": [
+								{
+									"activity": "Fail1",
+									"dependencyConditions": [
+										"Succeeded"
+									]
+								}
+							],
 							"policy": {
 								"timeout": "0.12:00:00",
 								"retry": 0,
@@ -162,6 +169,12 @@
 									"enablePartitionDiscovery": false
 								}
 							}
+						},
+						{
+							"name": "Fail1",
+							"type": "Fail",
+							"dependsOn": [],
+							"userProperties": []
 						}
 					]
 				}

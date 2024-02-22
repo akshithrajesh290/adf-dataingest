@@ -1,6 +1,7 @@
 {
 	"name": "tr_tumbling",
 	"properties": {
+		"description": "fbvfgbfg",
 		"annotations": [],
 		"runtimeState": "Started",
 		"pipeline": {

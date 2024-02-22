@@ -38,7 +38,7 @@
 				"type": "ForEach",
 				"dependsOn": [
 					{
-						"activity": "Lookup1",
+						"activity": "Wait1",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -167,6 +167,22 @@
 						"value": "{\n   'message' :'This is cusom pipeline message with run id @{pipeline().RunId}',\n    'dataFactoryName' : '@{pipeline().DataFactory}',\n    'pipelineName': '@{pipeline().Pipeline}',\n    'receiverEmail': '@{pipeline().parameters.receiverEmail}'\n\n}",
 						"type": "Expression"
 					}
+				}
+			},
+			{
+				"name": "Wait1",
+				"type": "Wait",
+				"dependsOn": [
+					{
+						"activity": "Lookup1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"waitTimeInSeconds": 600
 				}
 			}
 		],

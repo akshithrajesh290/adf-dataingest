@@ -1,0 +1,20 @@
+{
+	"name": "pl_storage_event",
+	"properties": {
+		"activities": [
+			{
+				"name": "Wait1",
+				"type": "Wait",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"waitTimeInSeconds": 60
+				}
+			}
+		],
+		"folder": {
+			"name": "trigger pipeliens"
+		},
+		"annotations": []
+	}
+}

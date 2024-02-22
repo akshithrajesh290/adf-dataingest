@@ -27,6 +27,18 @@
 			"type": "string",
 			"defaultValue": "https://kv-lnd-devv.vault.azure.net/"
 		},
+		"ls_sas_gen2_sasUri": {
+			"type": "secureString",
+			"metadata": "Secure string for 'sasUri' of 'ls_sas_gen2'"
+		},
+		"ls_sas_gen2_properties_typeProperties_sasToken_secretName": {
+			"type": "string",
+			"defaultValue": "SAS-Token-saaslnddevuksadlsv201"
+		},
+		"scheduled_properties_pl_copy_from_git_parameters_receiverEmail": {
+			"type": "string",
+			"defaultValue": "rajeshm@astrasi.com"
+		},
 		"containerUri": {
 			"type": "string",
 			"metadata": "URI to storage account containing linked ARM templates"
@@ -68,6 +80,15 @@
 					},
 					"ls_kv_properties_typeProperties_baseUrl": {
 						"value": "[parameters('ls_kv_properties_typeProperties_baseUrl')]"
+					},
+					"ls_sas_gen2_sasUri": {
+						"value": "[parameters('ls_sas_gen2_sasUri')]"
+					},
+					"ls_sas_gen2_properties_typeProperties_sasToken_secretName": {
+						"value": "[parameters('ls_sas_gen2_properties_typeProperties_sasToken_secretName')]"
+					},
+					"scheduled_properties_pl_copy_from_git_parameters_receiverEmail": {
+						"value": "[parameters('scheduled_properties_pl_copy_from_git_parameters_receiverEmail')]"
 					}
 				}
 			},

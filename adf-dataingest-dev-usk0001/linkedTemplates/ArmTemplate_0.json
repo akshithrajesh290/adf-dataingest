@@ -26,6 +26,18 @@
 		"ls_kv_properties_typeProperties_baseUrl": {
 			"type": "string",
 			"defaultValue": "https://kv-lnd-devv.vault.azure.net/"
+		},
+		"ls_sas_gen2_sasUri": {
+			"type": "secureString",
+			"metadata": "Secure string for 'sasUri' of 'ls_sas_gen2'"
+		},
+		"ls_sas_gen2_properties_typeProperties_sasToken_secretName": {
+			"type": "string",
+			"defaultValue": "SAS-Token-saaslnddevuksadlsv201"
+		},
+		"scheduled_properties_pl_copy_from_git_parameters_receiverEmail": {
+			"type": "string",
+			"defaultValue": "rajeshm@astrasi.com"
 		}
 	},
 	"variables": {
@@ -335,6 +347,29 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/ls_sas_gen2')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"sasUri": "[parameters('ls_sas_gen2_sasUri')]",
+					"sasToken": {
+						"type": "AzureKeyVaultSecret",
+						"store": {
+							"referenceName": "ls_kv",
+							"type": "LinkedServiceReference"
+						},
+						"secretName": "[parameters('ls_sas_gen2_properties_typeProperties_sasToken_secretName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ls_kv')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/pipeline1')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -471,7 +506,7 @@
 						"type": "ForEach",
 						"dependsOn": [
 							{
-								"activity": "Lookup1",
+								"activity": "Wait1",
 								"dependencyConditions": [
 									"Succeeded"
 								]
@@ -488,7 +523,14 @@
 								{
 									"name": "Copy data1",
 									"type": "Copy",
-									"dependsOn": [],
+									"dependsOn": [
+										{
+											"activity": "Fail1",
+											"dependencyConditions": [
+												"Succeeded"
+											]
+										}
+									],
 									"policy": {
 										"timeout": "0.12:00:00",
 										"retry": 0,
@@ -553,13 +595,74 @@
 											}
 										}
 									]
+								},
+								{
+									"name": "Fail1",
+									"type": "Fail",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"message": "Fail",
+										"errorCode": "400"
+									}
 								}
 							]
+						}
+					},
+					{
+						"name": "Web1",
+						"type": "WebActivity",
+						"dependsOn": [
+							{
+								"activity": "ForEach1",
+								"dependencyConditions": [
+									"Failed"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"method": "POST",
+							"headers": {},
+							"url": "https://la-dataingest-devv.azurewebsites.net:443/api/SendEmail/triggers/When_a_HTTP_request_is_received/invoke?api-version=2022-05-01&sp=%2Ftriggers%2FWhen_a_HTTP_request_is_received%2Frun&sv=1.0&sig=TodcB8jEQwcp283v-VS9ceiBjhadd9fdrzx3m9qTlMc",
+							"body": {
+								"value": "{\n   'message' :'This is cusom pipeline message with run id @{pipeline().RunId}',\n    'dataFactoryName' : '@{pipeline().DataFactory}',\n    'pipelineName': '@{pipeline().Pipeline}',\n    'receiverEmail': '@{pipeline().parameters.receiverEmail}'\n\n}",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "Wait1",
+						"type": "Wait",
+						"dependsOn": [
+							{
+								"activity": "Lookup1",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"waitTimeInSeconds": 600
 						}
 					}
 				],
 				"policy": {
 					"elapsedTimeMetric": {}
+				},
+				"parameters": {
+					"receiverEmail": {
+						"type": "string",
+						"defaultValue": "rajeshm@astrasi.com"
+					}
 				},
 				"folder": {
 					"name": "Copy Data HTTP"
@@ -939,6 +1042,38 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/dataflows/dataflow1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/scheduled')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "pl_copy_from_git",
+							"type": "PipelineReference"
+						},
+						"parameters": {
+							"receiverEmail": "[parameters('scheduled_properties_pl_copy_from_git_parameters_receiverEmail')]"
+						}
+					}
+				],
+				"type": "ScheduleTrigger",
+				"typeProperties": {
+					"recurrence": {
+						"frequency": "Minute",
+						"interval": 1,
+						"startTime": "2024-02-22T16:04:00",
+						"timeZone": "GMT Standard Time"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/pl_copy_from_git')]"
 			]
 		}
 	]

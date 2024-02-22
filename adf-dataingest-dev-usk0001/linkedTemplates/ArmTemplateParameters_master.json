@@ -20,6 +20,15 @@
 		"ls_kv_properties_typeProperties_baseUrl": {
 			"value": "https://kv-lnd-devv.vault.azure.net/"
 		},
+		"ls_sas_gen2_sasUri": {
+			"value": ""
+		},
+		"ls_sas_gen2_properties_typeProperties_sasToken_secretName": {
+			"value": "SAS-Token-saaslnddevuksadlsv201"
+		},
+		"scheduled_properties_pl_copy_from_git_parameters_receiverEmail": {
+			"value": "rajeshm@astrasi.com"
+		},
 		"containerUri": {
 			"value": ""
 		},

@@ -26,6 +26,9 @@
 		"ls_sas_gen2_properties_typeProperties_sasToken_secretName": {
 			"value": "SAS-Token-saaslnddevuksadlsv201"
 		},
+		"tr_tumbling_properties_pipeline_parameters_receiverEmail": {
+			"value": "rajeshm@astrasi.com"
+		},
 		"containerUri": {
 			"value": ""
 		},

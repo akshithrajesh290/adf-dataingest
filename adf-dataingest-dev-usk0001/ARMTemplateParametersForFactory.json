@@ -25,9 +25,6 @@
 		},
 		"ls_sas_gen2_properties_typeProperties_sasToken_secretName": {
 			"value": "SAS-Token-saaslnddevuksadlsv201"
-		},
-		"scheduled_properties_pl_copy_from_git_parameters_receiverEmail": {
-			"value": "rajeshm@astrasi.com"
 		}
 	}
 }

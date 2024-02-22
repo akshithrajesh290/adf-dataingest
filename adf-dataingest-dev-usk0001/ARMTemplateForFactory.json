@@ -34,10 +34,6 @@
 		"ls_sas_gen2_properties_typeProperties_sasToken_secretName": {
 			"type": "string",
 			"defaultValue": "SAS-Token-saaslnddevuksadlsv201"
-		},
-		"scheduled_properties_pl_copy_from_git_parameters_receiverEmail": {
-			"type": "string",
-			"defaultValue": "rajeshm@astrasi.com"
 		}
 	},
 	"variables": {
@@ -1058,38 +1054,6 @@
 				"[concat(variables('factoryId'), '/datasets/ds_cases_deaths')]",
 				"[concat(variables('factoryId'), '/datasets/ds_lookup')]",
 				"[concat(variables('factoryId'), '/datasets/ds_sink')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/scheduled')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Started",
-				"pipelines": [
-					{
-						"pipelineReference": {
-							"referenceName": "pl_copy_from_git",
-							"type": "PipelineReference"
-						},
-						"parameters": {
-							"receiverEmail": "[parameters('scheduled_properties_pl_copy_from_git_parameters_receiverEmail')]"
-						}
-					}
-				],
-				"type": "ScheduleTrigger",
-				"typeProperties": {
-					"recurrence": {
-						"frequency": "Minute",
-						"interval": 1,
-						"startTime": "2024-02-22T16:04:00",
-						"timeZone": "GMT Standard Time"
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/pl_copy_from_git')]"
 			]
 		},
 		{

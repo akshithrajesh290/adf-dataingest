@@ -39,6 +39,10 @@
 			"type": "string",
 			"defaultValue": "rajeshm@astrasi.com"
 		},
+		"tr_storage_event_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/63d2cb6c-75b5-4101-995c-1e76908f09d8/resourceGroups/rg-adls/providers/Microsoft.Storage/storageAccounts/saaslnddevuksadlsv201"
+		},
 		"containerUri": {
 			"type": "string",
 			"metadata": "URI to storage account containing linked ARM templates"
@@ -87,12 +91,35 @@
 					"ls_sas_gen2_properties_typeProperties_sasToken_secretName": {
 						"value": "[parameters('ls_sas_gen2_properties_typeProperties_sasToken_secretName')]"
 					},
+					"tr_storage_event_properties_typeProperties_scope": {
+						"value": "[parameters('tr_storage_event_properties_typeProperties_scope')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "adf-dataingest-dev-usk0001_ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2018-02-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
 					"tr_tumbling_properties_pipeline_parameters_receiverEmail": {
 						"value": "[parameters('tr_tumbling_properties_pipeline_parameters_receiverEmail')]"
 					}
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adf-dataingest-dev-usk0001_ArmTemplate_0')]"
+			]
 		}
 	]
 }

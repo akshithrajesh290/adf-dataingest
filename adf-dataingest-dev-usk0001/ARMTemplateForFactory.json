@@ -38,6 +38,10 @@
 		"tr_tumbling_properties_pipeline_parameters_receiverEmail": {
 			"type": "string",
 			"defaultValue": "rajeshm@astrasi.com"
+		},
+		"tr_storage_event_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/63d2cb6c-75b5-4101-995c-1e76908f09d8/resourceGroups/rg-adls/providers/Microsoft.Storage/storageAccounts/saaslnddevuksadlsv201"
 		}
 	},
 	"variables": {
@@ -1118,6 +1122,63 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/pipelines/pl_copy_from_git')]"
 			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/tr_storage_event')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "pl_storage_event",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					}
+				],
+				"type": "BlobEventsTrigger",
+				"typeProperties": {
+					"blobPathBeginsWith": "/trigger/blobs/textfiles",
+					"blobPathEndsWith": ".txt",
+					"ignoreEmptyBlobs": true,
+					"scope": "[parameters('tr_storage_event_properties_typeProperties_scope')]",
+					"events": [
+						"Microsoft.Storage.BlobCreated"
+					]
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/pl_storage_event')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/pl_storage_event')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Wait1",
+						"type": "Wait",
+						"dependsOn": [],
+						"userProperties": [],
+						"typeProperties": {
+							"waitTimeInSeconds": 60
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"folder": {
+					"name": "trigger pipeliens"
+				},
+				"annotations": []
+			},
+			"dependsOn": []
 		}
 	]
 }

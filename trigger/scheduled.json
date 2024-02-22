@@ -1,0 +1,27 @@
+{
+	"name": "scheduled",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "pl_copy_from_git",
+					"type": "PipelineReference"
+				},
+				"parameters": {
+					"receiverEmail": "rajeshm@astrasi.com"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Minute",
+				"interval": 1,
+				"startTime": "2024-02-22T16:04:00",
+				"timeZone": "GMT Standard Time"
+			}
+		}
+	}
+}

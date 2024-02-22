@@ -35,11 +35,11 @@
 			"type": "string",
 			"defaultValue": "SAS-Token-saaslnddevuksadlsv201"
 		},
-		"trigger1_properties_pl_copy_from_git_parameters_receiverEmail": {
+		"storage event trigger_properties_pl_copy_from_git_parameters_receiverEmail": {
 			"type": "string",
 			"defaultValue": "rajeshm@astrasi.com"
 		},
-		"trigger1_properties_typeProperties_scope": {
+		"storage event trigger_properties_typeProperties_scope": {
 			"type": "string",
 			"defaultValue": "/subscriptions/63d2cb6c-75b5-4101-995c-1e76908f09d8/resourceGroups/rg-adls/providers/Microsoft.Storage/storageAccounts/saaslnddevuksadlsv201"
 		}
@@ -1096,7 +1096,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/trigger1')]",
+			"name": "[concat(parameters('factoryName'), '/storage event trigger')]",
 			"type": "Microsoft.DataFactory/factories/triggers",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -1109,7 +1109,7 @@
 							"type": "PipelineReference"
 						},
 						"parameters": {
-							"receiverEmail": "[parameters('trigger1_properties_pl_copy_from_git_parameters_receiverEmail')]"
+							"receiverEmail": "[parameters('storage event trigger_properties_pl_copy_from_git_parameters_receiverEmail')]"
 						}
 					}
 				],
@@ -1118,7 +1118,7 @@
 					"blobPathBeginsWith": "/trigger/blobs/",
 					"blobPathEndsWith": ".txt",
 					"ignoreEmptyBlobs": true,
-					"scope": "[parameters('trigger1_properties_typeProperties_scope')]",
+					"scope": "[parameters('storage event trigger_properties_typeProperties_scope')]",
 					"events": [
 						"Microsoft.Storage.BlobCreated"
 					]

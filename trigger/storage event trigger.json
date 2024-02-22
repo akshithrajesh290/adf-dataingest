@@ -1,6 +1,7 @@
 {
 	"name": "storage event trigger",
 	"properties": {
+		"description": "freferferf",
 		"annotations": [],
 		"runtimeState": "Started",
 		"pipelines": [

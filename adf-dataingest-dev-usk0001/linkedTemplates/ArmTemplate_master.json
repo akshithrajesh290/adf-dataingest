@@ -35,6 +35,14 @@
 			"type": "string",
 			"defaultValue": "SAS-Token-saaslnddevuksadlsv201"
 		},
+		"trigger1_properties_pl_copy_from_git_parameters_receiverEmail": {
+			"type": "string",
+			"defaultValue": "rajeshm@astrasi.com"
+		},
+		"trigger1_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/63d2cb6c-75b5-4101-995c-1e76908f09d8/resourceGroups/rg-adls/providers/Microsoft.Storage/storageAccounts/saaslnddevuksadlsv201"
+		},
 		"containerUri": {
 			"type": "string",
 			"metadata": "URI to storage account containing linked ARM templates"
@@ -82,6 +90,12 @@
 					},
 					"ls_sas_gen2_properties_typeProperties_sasToken_secretName": {
 						"value": "[parameters('ls_sas_gen2_properties_typeProperties_sasToken_secretName')]"
+					},
+					"trigger1_properties_pl_copy_from_git_parameters_receiverEmail": {
+						"value": "[parameters('trigger1_properties_pl_copy_from_git_parameters_receiverEmail')]"
+					},
+					"trigger1_properties_typeProperties_scope": {
+						"value": "[parameters('trigger1_properties_typeProperties_scope')]"
 					}
 				}
 			},

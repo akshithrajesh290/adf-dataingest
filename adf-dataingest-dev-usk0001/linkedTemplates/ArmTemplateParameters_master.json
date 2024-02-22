@@ -26,12 +26,6 @@
 		"ls_sas_gen2_properties_typeProperties_sasToken_secretName": {
 			"value": "SAS-Token-saaslnddevuksadlsv201"
 		},
-		"storage event trigger_properties_pl_copy_from_git_parameters_receiverEmail": {
-			"value": "rajeshm@astrasi.com"
-		},
-		"storage event trigger_properties_typeProperties_scope": {
-			"value": "/subscriptions/63d2cb6c-75b5-4101-995c-1e76908f09d8/resourceGroups/rg-adls/providers/Microsoft.Storage/storageAccounts/saaslnddevuksadlsv201"
-		},
 		"containerUri": {
 			"value": ""
 		},
